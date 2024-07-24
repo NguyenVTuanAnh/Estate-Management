@@ -249,11 +249,14 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-xs-3">
+                                    <form:label class="col-xs-3" path="typeCode">
                                         loại tòa nhà
-                                    </label>
+                                    </form:label>
                                     <div class="col-xs-9">
-                                        <form:checkboxes items="${typeCode}" path="type" class="checked"/>
+                                        <form:checkboxes items="${typeCode}" path="typeCode" />
+                                        <c:forEach items="${typeCode}"
+
+
 
                                     </div>
                                 </div>
@@ -284,7 +287,7 @@
                                     </div>
 
                                 </div>
-                                <form:hidden path="id" id="buildingId"/>
+                                <form:hidden path="id"  id="buildingId" />
                             </form:form>
                         </div>
                     </div>
@@ -305,7 +308,7 @@
         var typeCode = [];
         var formData = $('#form-edit').serializeArray();
         $.each(formData, function(index, value){
-            if(value.name != 'type'){
+            if(value.name != 'typeCode'){
                 data["" + value.name + ""] = value.value
             }
 
@@ -314,12 +317,12 @@
             }
         });
         data['typeCode'] = typeCode;
-        if(typeCode != ''){
+        // if(typeCode != ''){
             addOrUpdateBuilding(data);
-
-        } else {
-            window.location.href= "/admin/building-edit";
-        }
+        //
+        // } else {
+        //     window.location.href= "/admin/building-edit";
+        // }
     });
     function addOrUpdateBuilding(data){
         $.ajax({
@@ -335,11 +338,51 @@
                 console.log(respond);
             }
         });
-        returnPage();
-    }
-    function returnPage(){
         window.location.href = "/admin/building-list";
+        updateWeb();
     }
+
+    $('#buildingId').ready(function (e){
+        $.ajax({
+            type: "GET",         // method của api
+            url: "/admin/building" + ${buildingDTO.id} +'/type',   // url cua api xử lý thao tác này
+            // data: JSON.stringify(data),     // chuyển dâta vừa thu thập ở trên thành dạng json
+            // contentType: "application/json", //
+            dataType: "JSON",               // định nghĩa data cho sever là json
+            success: function(respond){
+                var
+
+            },
+            error: function(respond){
+                console.log(respond);
+            }
+        });
+    })
+
+
+
+
+
+
+    function updateWeb(){
+        $.ajax({
+            type: "GET",         // method của api
+            url: "/admin/building-list",   // url cua api xử lý thao tác này
+            // data: JSON.stringify(data),     // chuyển dâta vừa thu thập ở trên thành dạng json
+            // contentType: "application/json", //
+            dataType: "JSON",               // định nghĩa data cho sever là json
+            success: function(respond){
+                console.log("oke");
+            },
+            error: function(respond){
+                console.log(respond);
+            }
+        });
+    }
+
+
+
+
 
     $('#btnCancel').click(function (){
         window.location.href = "/admin/building-list";

@@ -82,6 +82,16 @@ public class BuildingEntity {
 
     @OneToMany(mappedBy = "buildingEntity", fetch = FetchType.EAGER)
     List<RentAreaEntity> rentAreasList;
+
+
+    @ManyToMany
+    @JoinTable(
+            name = "assignmentbuilding",
+            joinColumns = @JoinColumn(name = "buildingid"),
+            inverseJoinColumns = @JoinColumn(name = "staffid")
+    )
+    private List<UserEntity> userEntityList;
+
     public Long getId() {
         return id;
     }
@@ -360,5 +370,13 @@ public class BuildingEntity {
 
     public void setRentAreasList(List<RentAreaEntity> rentAreasList) {
         this.rentAreasList = rentAreasList;
+    }
+
+    public List<UserEntity> getUserEntityList() {
+        return userEntityList;
+    }
+
+    public void setUserEntityList(List<UserEntity> userEntityList) {
+        this.userEntityList = userEntityList;
     }
 }

@@ -257,7 +257,7 @@
                                             <i class="ace-icon fa fa-check bigger-120"></i>
                                         </button>
 
-                                        <a href="/admin/building-edit-${item.id}" class="btn btn-xs btn-info" title="Chỉnh sửa tòa nhà">
+                                        <a href="/admin/building-edit-${item.id}" id="btnAddOrUpdateBuilding" class="btn btn-xs btn-info" title="Chỉnh sửa tòa nhà">
                                             <i class="ace-icon fa fa-pencil bigger-120"></i>
                                         </a>
 
@@ -348,20 +348,17 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td class="center">
-                                <input type="checkbox"  value="1"  id="checkbox_1" >
-                            </td>
-                            <td>
-                                Nguyên văn a
-                            </td>
-                        </tr>
+-
                         </tbody>
                     </table>
-                    <input type="hidden" id="buildingId" name="buildingId" value="1">
+
+
+                        <input path="id" type="hidden" id="buildingId" name="buildingId"  />
+
+
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success" id="btnAssignmentBuilding">Giao tòa nhà</button>
+                    <button type="button" class="btn btn-success" id="btnAssignmentBuilding" >Giao tòa nhà</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -374,10 +371,35 @@
     // làm chức năng nút giao tòa nhà hiển thị lên cái modal.
     function assignmentBuilding(buildingId){
         $('#assignmentBuildingModal').modal();
+        loadStaffList(buildingId);
+        $('#buildingId').val(buildingId);
+
     }
 
 
-
+    function loadStaffList(buildingId) {
+        $.ajax({
+            type: "get",         // method của api
+            url: "/api/building/" + buildingId+  '/staffs',   // url cua api xử lý thao tác này
+            //data: JSON.stringify(data),     // chuyển dâta vừa thu thập ở trên thành dạng json
+            //contentType: "application/json", //
+            dataType: "JSON",               // định nghĩa data cho sever là json
+            success: function (response) {      // response sẽ chứa data của bên back trả ra
+                var row = '';
+                $.each(response.data, function (index, item){
+                    row += '<tr>';
+                    row += ' <td class="center"> <input type="checkbox"  value=' + item.staffId +'  id="checkbox_1" ' + item.checked + ' > </td>'
+                    row += '<td>' + item.fullName + '</td>'
+                    row += '</tr>';
+                });
+                $('#staffList tbody').html(row);
+                console.log("okee");
+            },
+            error: function (response) {
+                console.log(response);
+            }
+        });
+    }
 
 
     // làm chức năng cho nút giao tòa nhà cho nhân viên.
@@ -389,6 +411,20 @@
             return $(this).val();
         }).get();
         data['staffs'] = staffs;
+
+        $.ajax({
+            type: "post",         // method của api
+            url: "/api/building"+'/assignment',   // url cua api xử lý thao tác này
+            data: JSON.stringify(data),     // chuyển dâta vừa thu thập ở trên thành dạng json
+            contentType: "application/json", //
+            dataType: "JSON",               // định nghĩa data cho sever là json
+            success: function(response){
+                console.log("oke");
+            },
+            error: function(response){
+                console.log(response);
+            }
+        });
     });
 
 
@@ -399,8 +435,11 @@
 
     });
 
+
+
+    // chức năng xóa tòa nhà theo listID
     function deleteOneBuilding(id){
-        var buildingId = [id];
+        var buildingId = [id];              // đẩy id vào biến buildingID (1 tòa nhà)
         deleteListBuilding(buildingId);
     }
 
@@ -409,16 +448,35 @@
         e.preventDefault();
         var buildingIdList = $('#tableList').find('tbody input[type = checkbox]:checked').map(function(){
             return $(this).val();
-        }).get();
+        }).get();                                // lấy các id của tòa nhà được đánh checkbox / btn xóa nhiều tòa nhà
         deleteListBuilding(buildingIdList);
+        window.location.href="/admin/building-list"
+        updateWeb();
     });
     function deleteListBuilding(data){
-
         $.ajax({
             type: "delete",         // method của api
             url: "/api/building",   // url cua api xử lý thao tác này
             data: JSON.stringify(data),     // chuyển dâta vừa thu thập ở trên thành dạng json
             contentType: "application/json", //
+            dataType: "JSON",               // định nghĩa data cho sever là json
+            success: function(response){
+                console.log("oke");
+            },
+            error: function(response){
+                console.log(response);
+            }
+        });
+
+    }
+
+
+    function updateWeb(){
+        $.ajax({
+            type: "GET",         // method của api
+            url: "/admin/building-list",   // url cua api xử lý thao tác này
+            // data: JSON.stringify(data),     // chuyển dâta vừa thu thập ở trên thành dạng json
+            // contentType: "application/json", //
             dataType: "JSON",               // định nghĩa data cho sever là json
             success: function(respond){
                 console.log("oke");
@@ -428,6 +486,9 @@
             }
         });
     }
+
+
+
 
 
 </script>

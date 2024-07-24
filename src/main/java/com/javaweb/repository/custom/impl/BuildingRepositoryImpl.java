@@ -130,4 +130,10 @@ public class BuildingRepositoryImpl implements BuildingRepositoryCustom {
         return query.getResultList();
     }
 
+
+//
+//
+//    public void deleteBuilding(BuildingEntity buildingEntity){
+//
+//    }
 }

@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Date;
+import java.util.List;
 
 public class BuildingDTO {
 
@@ -54,7 +55,7 @@ public class BuildingDTO {
 
     private Long brokerageFee;
 
-    private String type;
+    private List<String> typeCode;
 
     private String note;
 
@@ -260,12 +261,12 @@ public class BuildingDTO {
         this.brokerageFee = brokerageFee;
     }
 
-    public String getType() {
-        return type;
+    public List<String> getTypeCode() {
+        return typeCode;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setTypeCode(List<String> typeCode) {
+        this.typeCode = typeCode;
     }
 
     public String getNote() {

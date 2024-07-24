@@ -50,7 +50,7 @@ public class BuildingController {
         ModelAndView mav = new ModelAndView("admin/building/edit");
         mav.addObject("buildingDTO", buildingDTO);
         mav.addObject("districts", districtCode.type());
-        mav.addObject("typeCode", buildingType.type());
+        mav.addObject("typeCode", buildingType.type());       // ENUM
 
         return mav;
     }
