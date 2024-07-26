@@ -61,7 +61,7 @@
                                 <div class="form-group">
                                     <form:label path="street" class="col-xs-3">Đường</form:label>
                                     <div class="col-xs-9">
-                                        <form:input path="street" class="form-control" type="text" name="street" id="text"/>
+                                        <form:input path="street" class="form-control" type="text" id="text"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -252,9 +252,9 @@
                                     <form:label class="col-xs-3" path="typeCode">
                                         loại tòa nhà
                                     </form:label>
-                                    <div class="col-xs-9">
-                                        <form:checkboxes items="${typeCode}" path="typeCode" />
-                                        <c:forEach items="${typeCode}"
+                                    <div class="col-xs-9" >
+                                       <form:checkboxes items="${typeCode}" id="typeCodeShow" path="typeCode"/>
+
 
 
 
@@ -317,12 +317,12 @@
             }
         });
         data['typeCode'] = typeCode;
-        // if(typeCode != ''){
+         if(typeCode != ''){
             addOrUpdateBuilding(data);
-        //
-        // } else {
-        //     window.location.href= "/admin/building-edit";
-        // }
+         } else {
+            //window.location.href= "/admin/building-edit";
+            alert("fail");
+         }
     });
     function addOrUpdateBuilding(data){
         $.ajax({
@@ -338,55 +338,19 @@
                 console.log(respond);
             }
         });
-        window.location.href = "/admin/building-list";
-        updateWeb();
+
+
+        window.location.href="/admin/building-list"
+        alert("success");
     }
-
-    $('#buildingId').ready(function (e){
-        $.ajax({
-            type: "GET",         // method của api
-            url: "/admin/building" + ${buildingDTO.id} +'/type',   // url cua api xử lý thao tác này
-            // data: JSON.stringify(data),     // chuyển dâta vừa thu thập ở trên thành dạng json
-            // contentType: "application/json", //
-            dataType: "JSON",               // định nghĩa data cho sever là json
-            success: function(respond){
-                var
-
-            },
-            error: function(respond){
-                console.log(respond);
-            }
-        });
-    })
-
-
-
-
-
-
-    function updateWeb(){
-        $.ajax({
-            type: "GET",         // method của api
-            url: "/admin/building-list",   // url cua api xử lý thao tác này
-            // data: JSON.stringify(data),     // chuyển dâta vừa thu thập ở trên thành dạng json
-            // contentType: "application/json", //
-            dataType: "JSON",               // định nghĩa data cho sever là json
-            success: function(respond){
-                console.log("oke");
-            },
-            error: function(respond){
-                console.log(respond);
-            }
-        });
-    }
-
-
-
 
 
     $('#btnCancel').click(function (){
         window.location.href = "/admin/building-list";
+
     });
+
+
 </script>
 </body>
 </html>

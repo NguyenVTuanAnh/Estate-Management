@@ -16,6 +16,7 @@ import com.javaweb.repository.UserRepository;
 import com.javaweb.service.BuildingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -23,6 +24,7 @@ import java.security.KeyStore;
 import java.util.*;
 
 @Service
+@Transactional
 public class BuildingServiceImpl implements BuildingService {
 
     @Autowired
@@ -57,17 +59,12 @@ public class BuildingServiceImpl implements BuildingService {
 
     @Override
     public void deleteBuildingById(List<Long> listId) {
-        List<BuildingEntity> buildingEntityList = new ArrayList<>();
-        for(Long id : listId) {
-            buildingRepository.deleteById(id);
-        }
-
+        buildingRepository.deleteByIdIn(listId);
     }
 
     @Override
     public void addOrUpdateBuilding(BuildingEntity buildingEntity) {
-        buildingRepository.save(buildingEntity);
-        System.out.print("okeeee");
+         buildingRepository.save(buildingEntity);
     }
 
     @Override

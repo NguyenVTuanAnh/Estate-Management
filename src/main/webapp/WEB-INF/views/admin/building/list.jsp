@@ -450,8 +450,7 @@
             return $(this).val();
         }).get();                                // lấy các id của tòa nhà được đánh checkbox / btn xóa nhiều tòa nhà
         deleteListBuilding(buildingIdList);
-        window.location.href="/admin/building-list"
-        updateWeb();
+
     });
     function deleteListBuilding(data){
         $.ajax({
@@ -467,27 +466,9 @@
                 console.log(response);
             }
         });
-
+        window.location.href = "/admin/building-list";
+        location.reload(true);
     }
-
-
-    function updateWeb(){
-        $.ajax({
-            type: "GET",         // method của api
-            url: "/admin/building-list",   // url cua api xử lý thao tác này
-            // data: JSON.stringify(data),     // chuyển dâta vừa thu thập ở trên thành dạng json
-            // contentType: "application/json", //
-            dataType: "JSON",               // định nghĩa data cho sever là json
-            success: function(respond){
-                console.log("oke");
-            },
-            error: function(respond){
-                console.log(respond);
-            }
-        });
-    }
-
-
 
 
 

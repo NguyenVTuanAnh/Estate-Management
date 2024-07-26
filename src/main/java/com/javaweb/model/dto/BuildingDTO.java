@@ -1,5 +1,7 @@
 package com.javaweb.model.dto;
 
+import com.mysql.cj.x.protobuf.MysqlxDatatypes;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

@@ -3,6 +3,8 @@ package com.javaweb.entity;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 import javax.persistence.*;
+
+import java.util.Date;
 import java.util.List;
 
 
@@ -13,10 +15,10 @@ public class BuildingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
     @Column(name = "street")
-    private String Street;
+    private String street;
     @Column(name = "ward")
     private String ward;
     @Column(name = "district")
@@ -38,7 +40,7 @@ public class BuildingEntity {
     @Column(name = "servicefee")
     private String serviceFee;
     @Column(name = "carfee")
-    private String caeFee;
+    private String carFee;
     @Column(name = "motofee")
     private String motoFee;
     @Column(name = "overtimefee")
@@ -68,9 +70,9 @@ public class BuildingEntity {
     @Column(name = "avatar")
     private String avatar;
     @Column(name = "createddate")
-    private String createDate;
+    private Date createDate;
     @Column(name = "modifieddate")
-    private String modifiedDate;
+    private Date modifiedDate;
     @Column(name = "createdby")
     private String createBy;
     @Column(name = "modifiedby")
@@ -109,11 +111,11 @@ public class BuildingEntity {
     }
 
     public String getStreet() {
-        return Street;
+        return street;
     }
 
     public void setStreet(String street) {
-        Street = street;
+        this.street = street;
     }
 
     public String getWard() {
@@ -196,12 +198,12 @@ public class BuildingEntity {
         this.serviceFee = serviceFee;
     }
 
-    public String getCaeFee() {
-        return caeFee;
+    public String getCarFee() {
+        return carFee;
     }
 
-    public void setCaeFee(String caeFee) {
-        this.caeFee = caeFee;
+    public void setCarFee(String carFee) {
+        this.carFee = carFee;
     }
 
     public String getMotoFee() {
@@ -316,19 +318,19 @@ public class BuildingEntity {
         this.avatar = avatar;
     }
 
-    public String getCreateDate() {
+    public Date getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(String createDate) {
+    public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
 
-    public String getModifiedDate() {
+    public Date getModifiedDate() {
         return modifiedDate;
     }
 
-    public void setModifiedDate(String modifiedDate) {
+    public void setModifiedDate(Date modifiedDate) {
         this.modifiedDate = modifiedDate;
     }
 

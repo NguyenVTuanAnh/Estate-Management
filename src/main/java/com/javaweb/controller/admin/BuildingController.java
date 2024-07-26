@@ -40,7 +40,7 @@ public class BuildingController {
         mav.addObject("listStaffs", userService.getStaffs());
         mav.addObject("districts", districtCode.type());
         mav.addObject("typeCode", buildingType.type());
-
+        
         return mav;
     }
 
