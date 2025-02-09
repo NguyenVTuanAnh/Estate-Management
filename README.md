@@ -11,7 +11,7 @@ Estate Management là nền tảng cung cấp các dịch vụ cơ bản giúp q
 Tìm kiếm và quản lý các bất động sản    
 Trang quản trị dành cho người bán  
 
-## 🛠 Cách cài đặt & chạy dự án
+## Cách cài đặt & chạy dự án
 
 ### 1. Clone repo
 ```sh
@@ -43,8 +43,8 @@ Trang quản lý người dùng
 
 ## Liên hệ
 
-Email: nguyentuananhaz9@gmail.com
-LinkedIn: www.linkedin.com/in/tuan-anh-nguyen-1414aa317 
+Email: nguyentuananhaz9@gmail.com  
+LinkedIn: www.linkedin.com/in/tuan-anh-nguyen-1414aa317   
 
 ---
 
